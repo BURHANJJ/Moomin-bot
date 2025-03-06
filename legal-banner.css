@@ -1,0 +1,98 @@
+/* แบนเนอร์มุมขวาล่างสีขาว */
+.legal-banner {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+    padding: 12px;
+    z-index: 100;
+    transform: translateY(100%);
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333;
+    cursor: pointer;
+}
+
+.legal-banner.active {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.legal-banner-text {
+    font-size: 0.95em;
+    margin-bottom: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.legal-banner-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.legal-banner-links a {
+    text-decoration: none;
+    color: #2c5282;
+    font-weight: 600;
+    font-size: 0.95em;
+    padding: 8px 12px;
+    border-radius: 8px;
+    background: #edf2f7;
+    transition: all 0.3s ease;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+}
+
+.legal-banner-links a:hover {
+    color: #ffffff;
+    background: #2c5282;
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.5);
+    transform: translateY(-2px);
+}
+
+.legal-banner-links a.active {
+    color: #ffffff;
+    background: #2c5282;
+    box-shadow: 0 0 10px rgba(44, 82, 130, 0.7);
+    border-color: #2c5282;
+}
+
+/* Media Queries สำหรับปรับขนาดหน้าจอ */
+@media (max-width: 768px) {
+    .legal-banner {
+        bottom: 15px;
+        right: 15px;
+        width: 200px;
+        padding: 10px;
+    }
+    .legal-banner-text {
+        font-size: 0.9em;
+    }
+    .legal-banner-links a {
+        font-size: 0.9em;
+        padding: 6px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .legal-banner {
+        bottom: 10px;
+        right: 10px;
+        width: 180px;
+        padding: 8px;
+    }
+    .legal-banner-text {
+        font-size: 0.85em;
+    }
+    .legal-banner-links a {
+        font-size: 0.85em;
+        padding: 5px 8px;
+    }
+}

@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commands - Moomin#8389</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/DfYLSx4N/7cda581c-28e3-41bd-8660-b3056431c58b-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&family=Noto+Sans+Thai:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="legal-banner.css" rel="stylesheet"> <!-- เชื่อมโยงไฟล์ CSS แยก -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        html, body {
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a2a44, #121212), url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-blend-mode: overlay;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: #1e2b47;
+            border-bottom: 1px solid #2a3a5a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar .logo img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .navbar .logo h1 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #93c5fd;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        .nav-links a:hover i {
+            transform: rotate(15deg);
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: #93c5fd;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active {
+            transform: rotate(90deg);
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 90%;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 20px 0;
+            padding-bottom: 40px;
+        }
+        .commands-column {
+            flex: 1;
+            padding-right: 20px;
+            animation: fadeInLeft 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInLeft {
+            0% {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .search-column {
+            width: 300px;
+            position: sticky;
+            top: 80px;
+            animation: slideInRight 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes slideInRight {
+            0% {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        .search-container {
+            position: relative;
+            width: 100%;
+        }
+        .search-container input {
+            width: 100%;
+            padding: 12px 20px 12px 50px;
+            background: #1e2b47;
+            border: 2px solid #3b82f6;
+            border-radius: 25px;
+            color: #e0e0e0;
+            font-size: 1.1em;
+            font-family: 'Inter', sans-serif;
+            outline: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.2);
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+        }
+        .search-container input::placeholder {
+            color: #b0b8d1;
+            font-style: italic;
+        }
+        .search-container input:focus {
+            border-color: #2563eb;
+            transform: scale(1.02);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+            background: #252f4a;
+        }
+        .search-container i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #b0b8d1;
+            font-size: 1.2em;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+        .search-container input:focus + i {
+            color: #2563eb;
+            transform: translateY(-50%) scale(1.1);
+        }
+        .commands-section {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        .commands-section h2 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            margin-top: 20px;
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .commands-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 100%;
+        }
+        .commands-grid.admin-commands .command-item {
+            background: #2a3a5a;
+        }
+        .command-item {
+            background: #1e2b47;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInItem 0.5s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInItem {
+            0% {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(1) { animation-delay: 0.1s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(2) { animation-delay: 0.2s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(3) { animation-delay: 0.3s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(4) { animation-delay: 0.4s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(5) { animation-delay: 0.5s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(6) { animation-delay: 0.6s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(7) { animation-delay: 0.7s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(8) { animation-delay: 0.8s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(9) { animation-delay: 0.9s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(10) { animation-delay: 1.0s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(11) { animation-delay: 1.1s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(12) { animation-delay: 1.2s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(13) { animation-delay: 1.3s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(14) { animation-delay: 1.4s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(15) { animation-delay: 1.5s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(16) { animation-delay: 1.6s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(17) { animation-delay: 1.7s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(18) { animation-delay: 1.8s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(19) { animation-delay: 1.9s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(20) { animation-delay: 2.0s; }
+        .commands-grid:not(.admin-commands) .command-item:nth-child(21) { animation-delay: 2.1s; }
+        .commands-grid.admin-commands .command-item:nth-child(1) { animation-delay: 0.1s; }
+        .commands-grid.admin-commands .command-item:nth-child(2) { animation-delay: 0.2s; }
+        .commands-grid.admin-commands .command-item:nth-child(3) { animation-delay: 0.3s; }
+        .commands-grid.admin-commands .command-item:nth-child(4) { animation-delay: 0.4s; }
+        .commands-grid.admin-commands .command-item:nth-child(5) { animation-delay: 0.5s; }
+        .commands-grid.admin-commands .command-item:nth-child(6) { animation-delay: 0.6s; }
+        .commands-grid.admin-commands .command-item:nth-child(7) { animation-delay: 0.7s; }
+        .commands-grid.admin-commands .command-item:nth-child(8) { animation-delay: 0.8s; }
+        .commands-grid.admin-commands .command-item:nth-child(9) { animation-delay: 0.9s; }
+        .commands-grid.admin-commands .command-item:nth-child(10) { animation-delay: 1.0s; }
+        .command-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+        }
+        .command-item strong {
+            display: block;
+            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 1.1em;
+        }
+        .command-item span {
+            color: #b0b8d1;
+            font-size: 0.9em;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #93c5fd;
+            font-size: 0.9em;
+            background: #1e2b47;
+            border-top: 1px solid #2a3a5a;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        footer a {
+            color: #3b82f6;
+            text-decoration: none;
+            margin-left: 5px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+            .navbar .logo img {
+                width: 35px;
+                height: 35px;
+            }
+            .navbar .logo h1 {
+                font-size: 1em;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: #1e2b47;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                animation: fadeInMenu 0.3s ease-in-out forwards;
+                opacity: 0;
+            }
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+            }
+            @keyframes fadeInMenu {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .nav-links a {
+                font-size: 1em;
+                padding: 10px 20px;
+                width: 80%;
+                text-align: center;
+                margin: 5px 0;
+            }
+            .main-content {
+                flex-direction: column;
+                align-items: center;
+                width: 95%;
+            }
+            .commands-column {
+                width: 100%;
+                padding-right: 0;
+                margin-bottom: 20px;
+            }
+            .search-column {
+                width: 100%;
+                max-width: 350px;
+                position: static;
+            }
+            .commands-section h2 {
+                font-size: 2em;
+            }
+            .commands-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 15px;
+            }
+            .command-item {
+                padding: 15px;
+            }
+            .command-item strong {
+                font-size: 1em;
+            }
+            .command-item span {
+                font-size: 0.8em;
+            }
+            .search-container input {
+                padding: 10px 15px 10px 45px;
+                font-size: 1em;
+            }
+            .search-container i {
+                left: 15px;
+                font-size: 1em;
+            }
+            footer {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar .logo h1 {
+                font-size: 0.9em;
+            }
+            .nav-links a {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            .main-content {
+                width: 100%;
+            }
+            .commands-column {
+                width: 100%;
+            }
+            .search-column {
+                max-width: 280px;
+            }
+            .commands-section h2 {
+                font-size: 1.8em;
+            }
+            .commands-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .command-item {
+                padding: 12px;
+            }
+            .command-item strong {
+                font-size: 0.9em;
+            }
+            .command-item span {
+                font-size: 0.7em;
+            }
+            .search-container input {
+                padding: 8px 15px 8px 40px;
+                font-size: 0.9em;
+            }
+            .search-container i {
+                left: 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body oncopy="return false" oncut="return false" oncontextmenu="return false">
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://cdn.discordapp.com/attachments/1182457787679264799/1345748670120853514/v2.gif?ex=67c9a21d&is=67c8509d&hm=ada6a91e47ffb49d40b75b59d444ed0519de61305ff50e096fe6f4c8ccee7028&" alt="Moomin Logo">
+            <h1>Moomin#8389</h1>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="support.html"><i class="fas fa-heart"></i> Support</a>
+            <a href="commands.html" class="active"><i class="fas fa-cogs"></i> Commands</a>
+            <a href="developer.html"><i class="fas fa-user"></i> Developers</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <!-- คอลัมน์คำสั่ง (ซ้าย) -->
+        <div class="commands-column">
+            <div class="commands-section">
+                <h2>Commands Panel</h2>
+                <div class="commands-grid">
+                    <div class="command-item">
+                        <strong>/botinfo</strong>
+                        <span>ดูสถานะของบอท</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/กล่าวถึง</strong>
+                        <span>เอาไว้กล่าวถึงเล่นกันภายในเซิฟเวอร์</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/profile</strong>
+                        <span>ดู profile</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/setprofile</strong>
+                        <span>สร้าง profile</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>Coming Soon</strong>
+                        <span>Coming Soon</span>
+                    </div>
+                </div>
+
+                <h2>Admin Commands</h2>
+                <div class="commands-grid admin-commands">
+                    <div class="command-item">
+                        <strong>/ส่งปุ่มรับยศ</strong>
+                        <span>สร้างที่รับยศที่กำหนด</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/setwelcome</strong>
+                        <span>ตั้งค่าห้องเเจ้งเตือนเข้าเซิฟเวอร์</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/setfarewell</strong>
+                        <span>ตั้งค่าห้องเเจ้งเตือนออกเซิฟเวอร์</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>/setvoice</strong>
+                        <span>ตั้งค่าห้องเเจ้งเตือนเข้าออกห้องเสียง</span>
+                    </div>
+                    <div class="command-item">
+                        <strong>Coming Soon</strong>
+                        <span>Coming Soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- คอลัมน์ช่องค้นหา (ขวา) -->
+        <div class="search-column">
+            <div class="search-container">
+                <i class="fas fa-search"></i>
+                <input type="text" id="commandSearch" placeholder="ค้นหาคำสั่ง..." onkeyup="searchCommands()">
+            </div>
+        </div>
+    </div>
+
+    <!-- แบนเนอร์มุมขวาล่างสีขาว -->
+    <div class="legal-banner" id="legalBanner" onclick="toggleLegalBanner(event)">
+        <div class="legal-banner-text">
+            View our policies
+        </div>
+        <div class="legal-banner-links">
+            <a href="terms.html">Terms</a>
+            <a href="Privacy.html" class="active">Privacy</a>
+        </div>
+    </div>
+
+    <footer>© 2025 YourBotName. All rights reserved.</footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            if (hamburger.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        function searchCommands() {
+            const input = document.getElementById('commandSearch').value.toLowerCase();
+            const commandItems = document.querySelectorAll('.command-item');
+
+            commandItems.forEach(item => {
+                const commandName = item.querySelector('strong').textContent.toLowerCase();
+                const commandDesc = item.querySelector('span').textContent.toLowerCase();
+
+                if (commandName.includes(input) || commandDesc.includes(input)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            const grids = document.querySelectorAll('.commands-grid');
+            grids.forEach(grid => {
+                const visibleItems = grid.querySelectorAll('.command-item:not([style="display: none;"])');
+                const parentH2 = grid.previousElementSibling;
+                if (visibleItems.length > 0) {
+                    grid.style.display = 'grid';
+                    if (parentH2 && parentH2.tagName === 'H2') {
+                        parentH2.style.display = 'block';
+                    }
+                } else {
+                    grid.style.display = 'none';
+                    if (parentH2 && parentH2.tagName === 'H2') {
+                        parentH2.style.display = 'none';
+                    }
+                }
+            });
+        }
+        
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            if (hamburger.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        // แสดงแบนเนอร์เมื่อโหลดหน้า
+        window.onload = function() {
+            const legalBanner = document.getElementById('legalBanner');
+            legalBanner.classList.add('active');
+        };
+
+        function toggleLegalBanner(event) {
+            // ป้องกันการคลิกลิงก์ให้เปิด/ปิดแบนเนอร์
+            if (event.target.tagName === 'A') return;
+
+            const legalBanner = document.getElementById('legalBanner');
+            if (legalBanner.classList.contains('active')) {
+                legalBanner.classList.remove('active');
+            } else {
+                legalBanner.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

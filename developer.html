@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourBotName - Developer</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/DfYLSx4N/7cda581c-28e3-41bd-8660-b3056431c58b-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&family=Noto+Sans+Thai:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="legal-banner.css" rel="stylesheet"> <!-- เชื่อมโยงไฟล์ CSS แยก -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            /* ป้องกันการเลือกข้อความ */
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a2a44, #121212), url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-blend-mode: overlay;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: #1e2b47;
+            border-bottom: 1px solid #2a3a5a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar .logo img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .navbar .logo h1 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #93c5fd;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        .nav-links a:hover i {
+            transform: rotate(15deg);
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: #93c5fd;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active {
+            transform: rotate(90deg);
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .developer-section {
+            max-width: 500px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #252f4a;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .developer-section h2 {
+            font-size: 2em;
+            color: #ffffff;
+            margin-bottom: 20px;
+            text-align: center;
+            text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+        }
+        .developer-card {
+            background: #1e2b47;
+            background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-blend-mode: overlay;
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 20px;
+            width: 100%;
+            max-width: 300px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: zoomIn 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes zoomIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .developer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(59, 130, 246, 0.3);
+        }
+        .developer-card .profile-container {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .developer-card img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #3b82f6;
+            transition: transform 0.3s ease;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.2);
+        }
+        .developer-card img:hover {
+            transform: rotate(10deg) scale(1.05);
+        }
+        .developer-card .status-dot {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #252f4a;
+            background-color: #808080; /* Default: Offline (gray) */
+        }
+        .developer-card .status-dot.online {
+            background-color: #43b581; /* Online (green) */
+        }
+        .developer-card .status-dot.idle {
+            background-color: #faa61a; /* Idle (yellow) */
+        }
+        .developer-card .status-dot.dnd {
+            background-color: #f04747; /* Do Not Disturb (red) */
+        }
+        .developer-card .status-text {
+            font-size: 0.8em;
+            color: #b0b8d1;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+        .developer-card h3 {
+            font-size: 1.5em;
+            color: #ffffff;
+            margin-bottom: 8px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        .developer-card p.role {
+            font-size: 1em;
+            color: #3b82f6;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .developer-card p.description {
+            font-size: 0.9em;
+            color: #b0b8d1;
+            margin-bottom: 15px;
+        }
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        .social-links a {
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background: #3b82f6;
+            color: #fff;
+            text-align: center;
+            line-height: 35px;
+            border-radius: 50%;
+            font-size: 1.2em;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        .social-links a:hover {
+            background: #2563eb;
+            transform: rotate(360deg);
+            transition: transform 0.5s ease;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #93c5fd;
+            font-size: 0.9em;
+            background: #1e2b47;
+            border-top: 1px solid #2a3a5a;
+            width: 100%;
+            flex-shrink: 0;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+            .navbar .logo img {
+                width: 35px;
+                height: 35px;
+            }
+            .navbar .logo h1 {
+                font-size: 1em;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: #1e2b47;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                animation: fadeInMenu 0.3s ease-in-out forwards;
+                opacity: 0;
+            }
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+            }
+            @keyframes fadeInMenu {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .nav-links a {
+                font-size: 1em;
+                padding: 10px 20px;
+                width: 80%;
+                text-align: center;
+                margin: 5px 0;
+            }
+            .developer-section {
+                margin: 15px;
+                padding: 15px;
+            }
+            .developer-section h2 {
+                font-size: 1.8em;
+            }
+            .developer-card {
+                max-width: 280px;
+                padding: 15px;
+            }
+            .developer-card img {
+                width: 80px;
+                height: 80px;
+            }
+            .developer-card .status-dot {
+                width: 18px;
+                height: 18px;
+                bottom: 4px;
+                right: 4px;
+            }
+            .developer-card h3 {
+                font-size: 1.4em;
+            }
+            .developer-card p.role {
+                font-size: 0.9em;
+            }
+            .developer-card p.description {
+                font-size: 0.8em;
+            }
+            .developer-card .status-text {
+                font-size: 0.7em;
+            }
+            .social-links a {
+                width: 32px;
+                height: 32px;
+                line-height: 32px;
+                font-size: 1.1em;
+            }
+            footer {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar .logo h1 {
+                font-size: 0.9em;
+            }
+            .nav-links a {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            .developer-section {
+                margin: 10px;
+                padding: 10px;
+            }
+            .developer-section h2 {
+                font-size: 1.5em;
+            }
+            .developer-card {
+                max-width: 250px;
+                padding: 12px;
+            }
+            .developer-card img {
+                width: 70px;
+                height: 70px;
+            }
+            .developer-card .status-dot {
+                width: 16px;
+                height: 16px;
+                bottom: 3px;
+                right: 3px;
+            }
+            .developer-card h3 {
+                font-size: 1.2em;
+            }
+            .developer-card p.role {
+                font-size: 0.8em;
+            }
+            .developer-card p.description {
+                font-size: 0.7em;
+            }
+            .developer-card .status-text {
+                font-size: 0.65em;
+            }
+            .social-links a {
+                width: 28px;
+                height: 28px;
+                line-height: 28px;
+                font-size: 1em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://cdn.discordapp.com/attachments/1182457787679264799/1345748670120853514/v2.gif?ex=67c9a21d&is=67c8509d&hm=ada6a91e47ffb49d40b75b59d444ed0519de61305ff50e096fe6f4c8ccee7028&" alt="Moomin Logo">
+            <h1>Moomin#8389</h1>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="support.html"><i class="fas fa-heart"></i> Support</a>
+            <a href="commands.html"><i class="fas fa-cogs"></i> Commands</a>
+            <a href="developer.html" class="active"><i class="fas fa-user"></i> Developers</a>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="developer-section">
+            <h2>Developer</h2>
+            <div class="developers">
+                <div class="developer-card">
+                    <div class="profile-container">
+                        <img id="developer-avatar" src="https://via.placeholder.com/90?text=John" alt="HAN">
+                        <div id="developer-status" class="status-dot"></div>
+                    </div>
+                    <p id="developer-status-text" class="status-text">Loading...</p>
+                    <h3>HAN</h3>
+                    <p class="role">CEO & Developer</p>
+                    <p class="description">Passionate about creating Discord bots to enhance community experiences.</p>
+                    <div class="social-links">
+                        <a href="https://discord.gg/BzkB2m5YYd" target="_blank" rel="noopener noreferrer"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- แบนเนอร์มุมขวาล่างสีขาว -->
+    <div class="legal-banner" id="legalBanner" onclick="toggleLegalBanner(event)">
+        <div class="legal-banner-text">
+            View our policies
+        </div>
+        <div class="legal-banner-links">
+            <a href="terms.html">Terms</a>
+            <a href="Privacy.html" class="active">Privacy</a>
+        </div>
+    </div>
+
+    <footer>© 2025 YourBotName. All rights reserved.</footer>
+
+    <script>
+        // เปลี่ยน DISCORD_ID เป็น Discord ID ของผู้พัฒนา
+        const DISCORD_ID = "706160794923958313"; // แทนที่ด้วย Discord ID จริง (เช่น "123456789012345678") 
+
+        // ดึงข้อมูลสถานะ Discord ด้วย Lanyard API
+        fetch(`https://api.lanyard.rest/v1/users/${DISCORD_ID}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const user = data.data;
+                    const status = user.discord_status;
+                    const avatar = user.discord_user.avatar;
+
+                    // อัปเดตสถานะ
+                    const statusDot = document.getElementById('developer-status');
+                    const statusText = document.getElementById('developer-status-text');
+                    statusDot.classList.add(status);
+                    statusText.textContent = status.charAt(0).toUpperCase() + status.slice(1);
+
+                    // อัปเดตรูปโปรไฟล์
+                    const avatarUrl = `https://cdn.discordapp.com/avatars/${DISCORD_ID}/${avatar}.png?size=128`;
+                    document.getElementById('developer-avatar').src = avatarUrl;
+                } else {
+                    console.error("Failed to fetch Discord status:", data.error);
+                    document.getElementById('developer-status-text').textContent = "Offline";
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching Discord status:", error);
+                document.getElementById('developer-status-text').textContent = "Offline";
+            });
+
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            if (hamburger.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            if (hamburger.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        // แสดงแบนเนอร์เมื่อโหลดหน้า
+        window.onload = function() {
+            const legalBanner = document.getElementById('legalBanner');
+            legalBanner.classList.add('active');
+        };
+
+        function toggleLegalBanner(event) {
+            // ป้องกันการคลิกลิงก์ให้เปิด/ปิดแบนเนอร์
+            if (event.target.tagName === 'A') return;
+
+            const legalBanner = document.getElementById('legalBanner');
+            if (legalBanner.classList.contains('active')) {
+                legalBanner.classList.remove('active');
+            } else {
+                legalBanner.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

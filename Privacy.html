@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy - Moomin#8389</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/DfYLSx4N/7cda581c-28e3-41bd-8660-b3056431c58b-removebg-preview.png">
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;700&family=Noto+Sans+Thai:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="legal-banner.css" rel="stylesheet"> <!-- เชื่อมโยงไฟล์ CSS แยก -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        html, body {
+            margin: 0;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a2a44, #121212), url('https://www.transparenttextures.com/patterns/stardust.png');
+            background-blend-mode: overlay;
+            color: #e0e0e0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        .navbar {
+            background: #1e2b47;
+            border-bottom: 1px solid #2a3a5a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .navbar .logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #3b82f6;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .navbar .logo img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .navbar .logo h1 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #93c5fd;
+            font-weight: 500;
+            font-size: 1em;
+            padding: 8px 15px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        .nav-links a i {
+            font-size: 0.9em;
+            transition: transform 0.3s ease;
+        }
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(59, 130, 246, 0.3);
+            transform: scale(1.05);
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
+        }
+        .nav-links a:hover i {
+            transform: rotate(15deg);
+        }
+        .nav-links a.active {
+            color: #ffffff;
+            background: #3b82f6;
+            box-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+        }
+        .hamburger {
+            display: none;
+            font-size: 1.5em;
+            color: #93c5fd;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .hamburger.active {
+            transform: rotate(90deg);
+        }
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+        }
+        .legal-section {
+            max-width: 1000px;
+            width: 90%;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .legal-card {
+            background: rgba(37, 47, 74, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            animation: fadeInCard 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeInCard {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .legal-card h3 {
+            font-size: 2em;
+            color: #3b82f6;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .legal-card p {
+            font-size: 1.1em;
+            color: #b0b8d1;
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+        .legal-card ul {
+            list-style: none;
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        .legal-card ul li {
+            position: relative;
+            font-size: 1.1em;
+            color: #b0b8d1;
+            margin-bottom: 15px;
+        }
+        .legal-card ul li::before {
+            content: "•";
+            position: absolute;
+            left: -25px;
+            color: #3b82f6;
+            font-size: 1.5em;
+        }
+        footer {
+            text-align: center;
+            padding: 15px;
+            color: #93c5fd;
+            font-size: 0.9em;
+            background: #1e2b47;
+            border-top: 1px solid #2a3a5a;
+            width: 100%;
+            flex-shrink: 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: row;
+                gap: 10px;
+                padding: 10px 20px;
+            }
+            .navbar .logo img {
+                width: 35px;
+                height: 35px;
+            }
+            .navbar .logo h1 {
+                font-size: 1em;
+            }
+            .hamburger {
+                display: block;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                right: 0;
+                background: #1e2b47;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                animation: fadeInMenu 0.3s ease-in-out forwards;
+                opacity: 0;
+            }
+            .nav-links.active {
+                display: flex;
+                opacity: 1;
+            }
+            @keyframes fadeInMenu {
+                0% {
+                    opacity: 0;
+                    transform: translateY(-10px);
+                }
+                100% {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            .nav-links a {
+                font-size: 1em;
+                padding: 10px 20px;
+                width: 80%;
+                text-align: center;
+                margin: 5px 0;
+            }
+            .main-content {
+                padding: 20px 15px;
+            }
+            .legal-card {
+                padding: 20px;
+            }
+            .legal-card h3 {
+                font-size: 1.5em;
+            }
+            .legal-card p,
+            .legal-card ul li {
+                font-size: 0.9em;
+            }
+            footer {
+                font-size: 0.8em;
+                padding: 10px;
+            }
+        }
+        @media (max-width: 480px) {
+            .navbar .logo h1 {
+                font-size: 0.9em;
+            }
+            .nav-links a {
+                font-size: 0.9em;
+                padding: 8px 15px;
+            }
+            .main-content {
+                padding: 15px 10px;
+            }
+            .legal-card {
+                padding: 15px;
+            }
+            .legal-card h3 {
+                font-size: 1.3em;
+            }
+            .legal-card p,
+            .legal-card ul li {
+                font-size: 0.8em;
+            }
+            footer {
+                font-size: 0.8em;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">
+            <img src="https://cdn.discordapp.com/attachments/1182457787679264799/1345748670120853514/v2.gif?ex=67c5ad9d&is=67c45c1d&hm=16c1343e54c8be778cd23c5124090cadd7fe43ea1422c97b6db3cad649c11fc8&" alt="Moomin Logo">
+            <h1>Moomin#8389</h1>
+        </div>
+        <div class="hamburger" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <a href="support.html"><i class="fas fa-heart"></i> Support</a>
+            <a href="commands.html"><i class="fas fa-cogs"></i> Commands</a>
+            <a href="developer.html"><i class="fas fa-user"></i> Developers</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="legal-section">
+            <!-- Privacy Policy -->
+            <section class="legal-card">
+                <h3>Privacy Policy</h3>
+                <p>At Moomin#8389, we value your privacy. Here's how we handle your data:</p>
+                <ul>
+                    <li>We collect minimal data, such as user IDs and server IDs, to ensure the bot functions properly.</li>
+                    <li>Your data is not shared with third parties unless required by law.</li>
+                    <li>We store data securely and take measures to protect it from unauthorized access.</li>
+                    <li>Messages processed by the bot (e.g., commands) are not stored unless necessary for functionality.</li>
+                    <li>You can request the deletion of your data by contacting us through our support server.</li>
+                </ul>
+                <p>For more information, feel free to reach out to us.</p>
+            </section>
+        </div>
+    </div>
+
+    <!-- แบนเนอร์มุมขวาล่างสีขาว -->
+    <div class="legal-banner" id="legalBanner" onclick="toggleLegalBanner(event)">
+        <div class="legal-banner-text">
+            View our policies
+        </div>
+        <div class="legal-banner-links">
+            <a href="terms.html">Terms</a>
+            <a href="Privacy.html" class="active">Privacy</a>
+        </div>
+    </div>
+
+    <footer>© 2025 Moomin#8389. All rights reserved.</footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+            if (hamburger.classList.contains('active')) {
+                hamburger.innerHTML = '<i class="fas fa-times"></i>';
+            } else {
+                hamburger.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+
+        // แสดงแบนเนอร์เมื่อโหลดหน้า
+        window.onload = function() {
+            const legalBanner = document.getElementById('legalBanner');
+            legalBanner.classList.add('active');
+        };
+
+        function toggleLegalBanner(event) {
+            // ป้องกันการคลิกลิงก์ให้เปิด/ปิดแบนเนอร์
+            if (event.target.tagName === 'A') return;
+
+            const legalBanner = document.getElementById('legalBanner');
+            if (legalBanner.classList.contains('active')) {
+                legalBanner.classList.remove('active');
+            } else {
+                legalBanner.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>
